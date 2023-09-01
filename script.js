@@ -205,14 +205,15 @@ total: 212000
 // ТРИ ОЦЕНКИ. ЧИСТОТА КОДА, ЛОГИКА РАБОТЫ, УНИКАЛЬНОСТЬ КОДА*
 
 const setup = () => {
-    function arr(b) {
+    function arr(x) {
         taxes = 0
-        for(i = 0; i < b.length; i++) {
-            taxes += b[i]
+        for(i = 0; i < x.length; i++) {
+            taxes += x[i]
         }
         // console.log(taxes); // 4
     }
     let tax = []
+    let minMax = []
     bank.forEach(item => {
         let a = item.expensesPerYear.reduce((a, b) => a + b.total, 0)
         item.expensesPerMonth = a / 12
@@ -220,7 +221,7 @@ const setup = () => {
         
         let budgetMonth = item.budget / 12
         let procent = (item.expensesPerMonth * 100) / budgetMonth
-        console.log(procent + '%'); // 2
+        // console.log(procent + '%'); // 2
         
         
         let sum = budgetMonth - budgetMonth / item.tax
@@ -231,18 +232,18 @@ const setup = () => {
         }
         
         
-        let b = budgetMonth / item.tax
-        tax.push(b)
+        let payment = budgetMonth / item.tax
+        tax.push(payment)
+        minMax.push({payment, ...item})
         
         
         let totalMoney = item.budget - a - (item.budget / item.tax)
-        // console.log(totalMoney); // 6
-        
+        bank.push({totalMoney, ...item})
     })
-    // console.log(bank); // 1
+    // console.log(bank); // 1, 6
     // console.log(successful);// 3
-    taxesMin = Math.min.apply(null, tax)
-    taxesMax = Math.max.apply(null, tax)
+    taxesMax = minMax.reduce((a, b) => a.payment > b.payment ? a : b)
+    taxesMin = minMax.reduce((a, b) => a.payment < b.payment ? a : b)
     // console.log(taxesMax, taxesMin); // 5
     arr(tax)
     // console.log(tax);
