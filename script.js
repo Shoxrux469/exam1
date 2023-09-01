@@ -225,9 +225,9 @@ const setup = () => {
         
         let sum = budgetMonth - budgetMonth / item.tax
         if(sum > 0) {
-            successful.push(sum)
+            successful.push({sum, ...item})
         } else {
-            unSuccessful.push(sum)
+            unSuccessful.push({sum, ...item})
         }
         
         
