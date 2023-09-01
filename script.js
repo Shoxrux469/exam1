@@ -220,7 +220,7 @@ const setup = () => {
         
         let budgetMonth = item.budget / 12
         let procent = (item.expensesPerMonth * 100) / budgetMonth
-        // console.log(procent); // 2
+        console.log(procent + '%'); // 2
         
         
         let sum = budgetMonth - budgetMonth / item.tax
@@ -240,7 +240,7 @@ const setup = () => {
         
     })
     // console.log(bank); // 1
-    console.log(successful);// 3
+    // console.log(successful);// 3
     taxesMin = Math.min.apply(null, tax)
     taxesMax = Math.max.apply(null, tax)
     // console.log(taxesMax, taxesMin); // 5
